@@ -1,6 +1,6 @@
 #include <iostream>
 
-void memoryView(int);
+void memoryView(int, unsigned int);
 
 int main()
 {
@@ -11,32 +11,38 @@ int main()
 
     //2
     std::cout << "-255 = ";
-    memoryView(-255);
+    memoryView(-255, 32);
     std::cout << " 255 = ";
-    memoryView(255);
+    memoryView(255, 32);
     
     //3
     std::cout << "\n3)\n";
     union
     {
         int tool;
-        float num = 3.14f;
+        float num_f = 3.14f;
     };
-    std::cout << "3.14 = ";
-    memoryView(tool);
+    std::cout << " 3.14 = ";
+    memoryView(tool, 64);
+    std::cout << "-3,14 = ";
+    memoryView(tool * -1, 64);
 
     //4
     std::cout << "\n4)\n";
-    /*union
+    union
     {
         long long int tool1;
-        double num = 3.14;
-    };*/
+        double num_d = 3.14;
+    };
+    
+    std::cout << " 3.14 = ";
+    memoryView(tool1, 64);
+    std::cout << "-3.14 = ";
+    memoryView(tool1 * -1, 64);
 }
 
-void memoryView(int value)
+void memoryView(int value, unsigned int order)
 { 
-    unsigned int order = 32;
     unsigned int mask = 2147483648;
     int j = 1;
 
