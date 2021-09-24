@@ -5,16 +5,16 @@ void memoryView(int, unsigned int);
 int main()
 {
     //1
-    std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int) 
-                << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double) 
-                << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
+    std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int)
+        << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
+        << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
 
     //2
     std::cout << "-255 = ";
     memoryView(-255, 32);
     std::cout << " 255 = ";
     memoryView(255, 32);
-    
+
     //3
     std::cout << "\n3)\n";
     union
@@ -34,7 +34,7 @@ int main()
         long long int tool1;
         double num_d = 3.14;
     };
-    
+
     std::cout << " 3.14 = ";
     memoryView(tool1, 64);
     std::cout << "-3.14 = ";
@@ -42,11 +42,11 @@ int main()
 }
 
 void memoryView(int value, unsigned int order)
-{ 
-    unsigned int mask = 2147483648;
+{
+    unsigned int mask = 1 << order - 1;
     int j = 1;
 
-    for (int i = order; i >= 1; i--)
+    for (int i = 1; i <= order; i++)
     {
 
         putchar(value & mask ? '1' : '0');
