@@ -1,31 +1,45 @@
 #include <iostream>
 
-void memoryView(int, unsigned int);
+void memoryView_32(int);
+void memoryView_64(int);
 
 int main()
 {
-    //1
-    std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int)
-        << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
-        << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
 
+    //0 10000000 10010001111010111000011
+    //0 10000000 10010001111010111000011
+    
+    //0 10000000000 1001000111101011100001010001111010111000010100011111
+    //0 10100011110 1011100001010001111100000000000000000000000000000000
+
+    //1
+    //std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int)
+    //   << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
+    //    << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
     //2
-    std::cout << "-255 = ";
-    memoryView(-255, 32);
-    std::cout << " 255 = ";
-    memoryView(255, 32);
+    int inum;
+    std::cout << "Введите  положительное целочисленное значение: (int)";
+    std::cin >> inum;
+    system("Cls");
+
+    std::cout << inum << " = ";
+    memoryView_32(inum);
+
+    std::cout << -inum << " = ";
+    memoryView_32(-inum);
 
     //3
     std::cout << "\n3)\n";
     union
     {
         int tool;
-        float num_f = 3.14f;
+        float num_f = 3.14;
     };
-    std::cout << " 3.14 = ";
-    memoryView(tool, 64);
-    std::cout << "-3,14 = ";
-    memoryView(tool * -1, 64);
+    std::cout <<" 3.14 = ";
+    memoryView_32(tool);
+
+    std::cout <<"-3.14 = ";
+    memoryView_32(-tool);
 
     //4
     std::cout << "\n4)\n";
@@ -36,15 +50,16 @@ int main()
     };
 
     std::cout << " 3.14 = ";
-    memoryView(tool1, 64);
+    memoryView_64(tool1);
+
     std::cout << "-3.14 = ";
-    memoryView(tool1 * -1, 64);
+    memoryView_64(-tool1);
 }
 
-void memoryView(int value, unsigned int order)
+void memoryView_32(int value)
 {
-    unsigned int mask = 1 << order - 1;
-    int j = 1;
+    int order = 32;
+    int mask = 1 << (order - 1);
 
     for (int i = 1; i <= order; i++)
     {
@@ -52,11 +67,29 @@ void memoryView(int value, unsigned int order)
         putchar(value & mask ? '1' : '0');
         value <<= 1;
 
-        if (j % 8 == 0)
+        if (i == 9)
             std::cout << ' ';
-        if (j % order - 1 == 0)
+        if (i % order - 1 == 0)
             std::cout << ' ';
-        j++;
+    }
+    std::cout << '\n';
+}
+
+void memoryView_64(int value)
+{
+    int order = 64;
+    int mask = 1 << (order - 1);
+
+    for (int i = 1; i <= order; i++)
+    {
+
+        putchar(value & mask ? '1' : '0');
+        value <<= 1;
+
+        if (i == 12)
+            std::cout << ' ';
+        if (i % order - 1 == 0)
+            std::cout << ' ';
     }
     std::cout << '\n';
 }
