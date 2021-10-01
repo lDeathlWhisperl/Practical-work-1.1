@@ -5,7 +5,7 @@ void memoryView_64(int);
 
 int main()
 {
-
+    setlocale(0, "");
     //0 10000000 10010001111010111000011
     //0 10000000 10010001111010111000011
     
@@ -13,16 +13,16 @@ int main()
     //0 10100011110 1011100001010001111100000000000000000000000000000000
 
     //1
-    //std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int)
-    //   << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
-    //    << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
+    std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int) << "\nlong int: " << sizeof(long int)
+       << "\nlong long int: " << sizeof(long long int) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
+       << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
     //2
     int inum;
-    std::cout << "Введите  положительное целочисленное значение: (int)";
+    std::cout << "Введите  положительное целочисленное значение: ";
     std::cin >> inum;
     system("Cls");
 
-    std::cout << inum << " = ";
+    std::cout << " " << inum << " = ";
     memoryView_32(inum);
 
     std::cout << -inum << " = ";
