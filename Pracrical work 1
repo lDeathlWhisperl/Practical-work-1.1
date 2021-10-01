@@ -78,7 +78,7 @@ void memoryView_32(int value)
 void memoryView_64(int value)
 {
     long long order = 64;
-    long long mask = 1 << (order - 1);
+    unsigned _int64 mask = static_cast<unsigned _int64>(1) << order - 1;
 
     for (int i = 1; i <= order; i++)
     {
