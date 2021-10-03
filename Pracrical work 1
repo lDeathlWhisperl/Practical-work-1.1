@@ -37,31 +37,36 @@ int main()
     unity_d.getNumber();
     system("Cls");
 
-/*1*/
-    std::cout << "1)\n" << "int: " << sizeof(int) << " байта\nshort int: " << sizeof(short int)
-        << " байта\nlong long int: " << sizeof(long long) << " байт\nfloat: " << sizeof(float) << " байта\ndouble: " << sizeof(double)
-        << " байт\nlong double: " << sizeof(long double) << " байт\nchar:" << sizeof(char) << " байт\nbool: " << sizeof(bool) << " байт\n";
+    /*1*/
+    std::cout << "1)\n" << "int:           " << sizeof(int)         << " байта\n"
+                           "short int:     " << sizeof(short int)   << " байта\n"
+                           "long long int: " << sizeof(long long)   << " байт\n"
+                           "float:         " << sizeof(float)       << " байта\n"
+                           "double:        " << sizeof(double)      << " байт\n"
+                           "long double:   " << sizeof(long double) << " байт\n"
+                           "char:          " << sizeof(char)        << " байт\n"
+                           "bool:          " << sizeof(bool)        << " байт\n";
 
-/*2*/
+    /*2*/
     std::cout << "\n2)\n " << num_i << " = ";
     memoryView_32(num_i);
 
     std::cout << -num_i << " = ";
     memoryView_32(-num_i);
 
-/*3*/
+    /*3*/
     std::cout << "\n3)\n";
-    
+
     std::cout << " " << unity_f.num_f << " = ";
     memoryView_32(unity_f.tool);
 
     std::cout << -unity_f.num_f << " = ";
     memoryView_32(-unity_f.tool);
 
-/*4*/
+    /*4*/
     std::cout << "\n4)\n";
 
-    std::cout << " " << unity_d.num_d <<" = ";
+    std::cout << " " << unity_d.num_d << " = ";
     memoryView_64(unity_d.tool1);
 
     std::cout << -unity_d.num_d << " = ";
@@ -94,7 +99,7 @@ void memoryView_64(long long int value)
 
     for (int i = 1; i <= order; i++)
     {
-        arr[i-1] = (value & mask ? '1' : '0');
+        arr[i - 1] = (value & mask ? '1' : '0');
         mask <<= 1;
     }
 
