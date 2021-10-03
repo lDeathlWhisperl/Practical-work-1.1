@@ -3,24 +3,49 @@
 void memoryView_32(int);
 void memoryView_64(int);
 
+union Unity_f
+{
+    int tool;
+    float num_f;
+    void getNumber()
+    {
+        std::cout << "(float) Введите положительное вещественное число: ";
+        std::cin >> num_f;
+    }
+};
+
+union Unity_d
+{
+    long long int tool1;
+    double num_d;
+    void getNumber()
+    {
+        std::cout << "(double) Введите положительное вещественное число: ";
+        std::cin >> num_d;
+    }
+};
+
 int main()
 {
     setlocale(0, "");
     //0 10000000 10010001111010111000011
-    //0 10000000 10010001111010111000011
-    
+
     //0 10000000000 1001000111101011100001010001111010111000010100011111
-    //0                                  1010001111010111000010100011111
-    
+    //                                  01010001111010111000010100011111 00000000000000000000000000000000
+
     //1
     std::cout << "1)\n" << "int: " << sizeof(int) << "\nshort int: " << sizeof(short int)
-       << "\nlong long int: " << sizeof(long long) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
-       << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
+        << "\nlong long int: " << sizeof(long long) << "\nfloat: " << sizeof(float) << "\ndouble: " << sizeof(double)
+        << "\nlong double: " << sizeof(long double) << "\nchar:" << sizeof(char) << "\nbool: " << sizeof(bool) << "\n\n2)\n";
+
     //2
     int inum;
+    Unity_f unity_f;
+    Unity_d unity_d;
     std::cout << "Введите  положительное целочисленное значение: ";
     std::cin >> inum;
-    system("Cls");
+    unity_f.getNumber();
+    unity_d.getNumber();
 
     std::cout << " " << inum << " = ";
     memoryView_32(inum);
@@ -30,30 +55,21 @@ int main()
 
     //3
     std::cout << "\n3)\n";
-    union
-    {
-        int tool;
-        float num_f = 3.14;
-    };
-    std::cout <<" 3.14 = ";
-    memoryView_32(tool);
+    
+    std::cout << " " << unity_f.num_f << " = ";
+    memoryView_32(unity_f.tool);
 
-    std::cout <<"-3.14 = ";
-    memoryView_32(-tool);
+    std::cout << -unity_f.num_f << " = ";
+    memoryView_32(-unity_f.tool);
 
     //4
     std::cout << "\n4)\n";
-    union
-    {
-        long long int tool1;
-        double num_d = 3.14;
-    };
 
-    std::cout << " 3.14 = ";
-    memoryView_64(tool1);
+    std::cout << " " << unity_d.num_d <<" = ";
+    memoryView_64(unity_d.tool1);
 
-    std::cout << "-3.14 = ";
-    memoryView_64(-tool1);
+    std::cout << -unity_d.num_d << " = ";
+    memoryView_64(-unity_d.tool1);
 }
 
 void memoryView_32(int value)
@@ -80,7 +96,7 @@ void memoryView_64(int value)
     long long order = 64;
     unsigned _int64 mask = static_cast<unsigned _int64>(1) << order - 1;
 
-    for (int i = 1; i <= order; i++)
+    for (int i = 1; i = order; i++)
     {
 
         putchar(value & mask ? '1' : '0');
