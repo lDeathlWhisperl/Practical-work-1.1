@@ -7,9 +7,9 @@ union Unity_f
 {
     int tool;
     float num_f;
-    void getNumber()
+    Unity_f()
     {
-        std::cout << "(float) Введите положительное вещественное число: ";
+        std::cout << "(float)  Введите  положительное  вещественное число: ";
         std::cin >> num_f;
     }
 };
@@ -18,9 +18,9 @@ union Unity_d
 {
     long long int tool1;
     double num_d;
-    void getNumber()
+    Unity_d()
     {
-        std::cout << "(double) Введите положительное вещественное число: ";
+        std::cout << "(double) Введите  положительное  вещественное число: ";
         std::cin >> num_d;
     }
 };
@@ -29,15 +29,13 @@ int main()
 {
     setlocale(0, "");
     int num_i;
+    std::cout << "(int)    Введите  положительное целочисленное число: ";
+    std::cin >> num_i;
     Unity_f unity_f;
     Unity_d unity_d;
-    std::cout << "Введите  положительное целочисленное значение: ";
-    std::cin >> num_i;
-    unity_f.getNumber();
-    unity_d.getNumber();
     system("Cls");
 
-    /*1*/
+/*1*/
     std::cout << "1)\n" << "int:           " << sizeof(int)         << " байта\n"
                            "short int:     " << sizeof(short int)   << " байта\n"
                            "long long int: " << sizeof(long long)   << " байт\n"
@@ -47,14 +45,14 @@ int main()
                            "char:          " << sizeof(char)        << " байт\n"
                            "bool:          " << sizeof(bool)        << " байт\n";
 
-    /*2*/
+/*2*/
     std::cout << "\n2)\n " << num_i << " = ";
     memoryView_32(num_i);
 
     std::cout << -num_i << " = ";
     memoryView_32(-num_i);
 
-    /*3*/
+/*3*/
     std::cout << "\n3)\n";
 
     std::cout << " " << unity_f.num_f << " = ";
@@ -63,7 +61,7 @@ int main()
     std::cout << -unity_f.num_f << " = ";
     memoryView_32(-unity_f.tool);
 
-    /*4*/
+/*4*/
     std::cout << "\n4)\n";
 
     std::cout << " " << unity_d.num_d << " = ";
@@ -76,7 +74,7 @@ int main()
 void memoryView_32(int value)
 {
     int order = 32;
-    int mask = 1 << (order - 1);
+    int mask  = 1 << (order - 1);
 
     for (int i = 1; i <= order; i++)
     {
