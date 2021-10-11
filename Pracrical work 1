@@ -1,7 +1,6 @@
 #include <iostream>
 
-void memoryView_32(int);
-void memoryView_64(long long int);
+void memoryView(long long int, int order, int space = -1);
 
 union Unity_f
 {
@@ -35,65 +34,49 @@ int main()
     Unity_d unity_d;
     system("Cls");
 
-/*1*/
-    std::cout << "1)\n" << "int:           " << sizeof(int)         << " байта\n"
-                           "short int:     " << sizeof(short int)   << " байта\n"
-                           "long long int: " << sizeof(long long)   << " байт\n"
-                           "float:         " << sizeof(float)       << " байта\n"
-                           "double:        " << sizeof(double)      << " байт\n"
-                           "long double:   " << sizeof(long double) << " байт\n"
-                           "char:          " << sizeof(char)        << " байт\n"
-                           "bool:          " << sizeof(bool)        << " байт\n";
+    /*1*/
+    std::cout << "\n1)--------------------\n" <<
+        "int:           " << sizeof(int) << " байта\n"
+        "short int:     " << sizeof(short int) << " байта\n"
+        "long long int: " << sizeof(long long) << " байт\n"
+        "float:         " << sizeof(float) << " байта\n"
+        "double:        " << sizeof(double) << " байт\n"
+        "long double:   " << sizeof(long double) << " байт\n"
+        "char:          " << sizeof(char) << " байт\n"
+        "bool:          " << sizeof(bool) << " байт\n";
 
-/*2*/
-    std::cout << "\n2)\n " << num_i << " = ";
-    memoryView_32(num_i);
+    /*2*/
+    std::cout << "\n2)--------------------\n";
 
-    std::cout << -num_i << " = ";
-    memoryView_32(-num_i);
+    std::cout << " " << num_i << " = ";
+    memoryView(num_i, 32);
 
-/*3*/
-    std::cout << "\n3)\n";
+    std::cout << "" << -num_i << " = ";
+    memoryView(-num_i, 32);
+
+    /*3*/
+    std::cout << "\n3)--------------------\n";
 
     std::cout << " " << unity_f.num_f << " = ";
-    memoryView_32(unity_f.tool);
+    memoryView(unity_f.tool, 32, 23);
 
-    std::cout << -unity_f.num_f << " = ";
-    memoryView_32(-unity_f.tool);
+    std::cout << "" << -unity_f.num_f << " = ";
+    memoryView(-unity_f.tool, 32, 23);
 
-/*4*/
-    std::cout << "\n4)\n";
+    /*4*/
+    std::cout << "\n4)--------------------\n";
 
     std::cout << " " << unity_d.num_d << " = ";
-    memoryView_64(unity_d.tool1);
+    memoryView(unity_d.tool1, 64, 52);
 
-    std::cout << -unity_d.num_d << " = ";
-    memoryView_64(-unity_d.tool1);
+    std::cout << "" << -unity_d.num_d << " = ";
+    memoryView(-unity_d.tool1, 64, 52);
 }
 
-void memoryView_32(int value)
+void memoryView(long long int value, int order, int space)
 {
-    int order = 32;
-    int mask  = 1 << (order - 1);
-
-    for (int i = 1; i <= order; i++)
-    {
-        putchar(value & mask ? '1' : '0');
-        value <<= 1;
-
-        if (i == 9)
-            std::cout << ' ';
-        if (i % order - 1 == 0)
-            std::cout << ' ';
-    }
-    std::cout << '\n';
-}
-
-void memoryView_64(long long int value)
-{
-    const int order = 64;
     unsigned long long int mask = 1;
-    unsigned char arr[order]; //массив для отзеркаливания числа
+    char *arr = new char[order]; //массив для отзеркаливания числа
 
     for (int i = 1; i <= order; i++)
     {
@@ -104,10 +87,11 @@ void memoryView_64(long long int value)
     for (int i = order - 1; i >= 0; i--)
     {
         std::cout << arr[i];
-        if (i == 52)
+        if (i == space)
             std::cout << ' ';
         if (i == order - 1)
             std::cout << ' ';
     }
     std::cout << '\n';
+    delete[] arr;
 }
